@@ -4,41 +4,151 @@
 <head>
     <title>Carousel</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="slick.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://use.fontawesome.com/6714dfc69b.js"></script>
 </head>
 
 <body>
-    <div class="phone">
-        <div class="phone-inner">
-            <div class="phone-carousel">
-                <div class="phone-item">
-                    <img src="phone1.png" alt="">
+    <div class="centered-container">
+        <div class="phone">
+            <div class="phone-inner">
+                <div class="phone-carousel">
+                    <div class="phone-item">
+                        <div class="phone-section-1">
+                            <div>
+                                <img src="phone1.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone2.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-item">
+                       <div class="phone-section-2">
+                            <div>
+                                <img src="phone1.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone2.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-item">
+                        <div class="phone-section-3">
+                            <div>
+                                <img src="phone1.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone2.png" alt="">
+                            </div>
+                            <div>
+                                <img src="phone3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="phone-item">
-                    <img src="phone2.png" alt="">
+            </div>
+        </div>
+        <div class="sections">
+            <div class="sections-wrapper">
+                <div class="section">
+                    <div class="section-slider section-slider-1">
+                        <div>
+                            <div class="section-image">Slide 1 da Seção 1</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 2 da Seção 1</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 3 da Seção 1</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="phone-item">
-                    <img src="phone3.png" alt="">
+                <div class="section">
+                     <div class="section-slider section-slider-2">
+                        <div>
+                            <div class="section-image">Slide 1 da Seção 2</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 2 da Seção 2</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 3 da Seção 3</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                     <div class="section-slider section-slider-3">
+                        <div>
+                            <div class="section-image">Slide 1 da Seção 3</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 2 da Seção 3</div>
+                        </div>
+                        <div>
+                            <div class="section-image">Slide 3 da Seção 3</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="sections">
-        <div class="sections-wrapper">
-            <div class="section">
-                <h1>Section 1</h1>
-            </div>
-            <div class="section">
-                <h1>Section 2</h1>
-            </div>
-            <div class="section">
-                <h1>Section 3</h1>
-            </div>
-        </div>
-    </div>
-
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="slick.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script>
+        // $(function(){
+
+        $('.phone-section-1').slick({
+            slidesToShow: 1,
+            arrows: false,
+            asNavFor: '.section-slider-1',
+            dots: false
+        });
+        $('.section-slider-1').slick({
+            slidesToShow: 1,
+            prevArrow: '<span class="section-nav prev-nav fa fa-angle-left"></span>',
+            nextArrow: '<span class="section-nav next-nav fa fa-angle-right"></span>',
+            asNavFor: '.phone-section-1',
+            dots: true
+        });
+
+        $('.phone-section-2').slick({
+            slidesToShow: 1,
+            arrows: false,
+            asNavFor: '.section-slider-2',
+            dots: false
+        });
+        $('.section-slider-2').slick({
+            slidesToShow: 1,
+            prevArrow: '<span class="section-nav prev-nav fa fa-angle-left"></span>',
+            nextArrow: '<span class="section-nav next-nav fa fa-angle-right"></span>',
+            asNavFor: '.phone-section-2',
+            dots: true
+        });
+
+        $('.phone-section-3').slick({
+            slidesToShow: 1,
+            arrows: false,
+            asNavFor: '.section-slider-3',
+            dots: false
+        });
+        $('.section-slider-3').slick({
+            slidesToShow: 1,
+            prevArrow: '<span class="section-nav prev-nav fa fa-angle-left"></span>',
+            nextArrow: '<span class="section-nav next-nav fa fa-angle-right"></span>',
+            asNavFor: '.phone-section-3',
+            dots: true
+        });
+    // });
         rscroll.init('.sections-wrapper', '.phone-carousel');
     </script>
 </body>
