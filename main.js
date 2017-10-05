@@ -42,6 +42,7 @@ var rscroll = (function() {
         init: function(container, mirror) {
             initVariables(container, mirror);
 
+            //
             window.addEventListener('scroll', function() {
                 var percent = 100 * window.pageYOffset / (pageHeight - scrollHeight);
 
@@ -49,6 +50,11 @@ var rscroll = (function() {
 
                 phoneTrack.style.transform = 'translateY(-' + stepPhone + 'px)';
 
+            });
+
+
+            window.addEventListener('resize',function(){
+                initVariables(container, mirror);
             });
         }
     }
