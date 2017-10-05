@@ -40,7 +40,11 @@
 
     <script type="text/javascript" src="main.js"></script>
     <script>
-        rscroll.init('.sections-wrapper', '.phone-carousel');
+        rscroll.init({
+            container: '.sections-wrapper',
+            reflection: '.phone-carousel',
+            lock: true
+        });
     </script>
 </body>
 

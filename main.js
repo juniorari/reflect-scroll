@@ -6,8 +6,9 @@ var rscroll = (function() {
     var sectionsNumber;
     var stepPhone;
     var stepSection;
-    var scrollHeight;
+    var scrollHeightTrigger;
     var pageHeight;
+    var percent;
 
     var $ = function(selector) {
         if (selector.substring(0, 1) == '#') {
@@ -16,19 +17,19 @@ var rscroll = (function() {
         return document.querySelectorAll(selector);
     }
 
-    var initVariables = function(container, mirror) {
+    var initVariables = function(config) {
         if (!$('.phone-carousel')[0]) {
             console.log('Error: Nenhum elemento encontrado para o container');
             return;
         }
 
-        sections = $(container)[0].querySelectorAll('.section');
+        sections = $(config.container)[0].querySelectorAll(':scope > div');
         sectionsNumber = sections.length;
         sectionHeight = window.innerHeight;
-        scrollHeight = sectionHeight;
+        scrollHeightTrigger = sectionHeight / 2;
 
-        phoneTrack = $(mirror)[0];
-        phoneSlideHeight = $(mirror)[0].querySelector('.phone-item').clientHeight;
+        phoneTrack = $(config.reflection)[0];
+        phoneSlideHeight = $(config.reflection)[0].querySelector(':scope > div').clientHeight;
         stepPhone = 0;
 
         Array.prototype.forEach.call(sections, function(el) {
@@ -39,22 +40,40 @@ var rscroll = (function() {
     }
 
     return {
-        init: function(container, mirror) {
-            initVariables(container, mirror);
+        init: function(config) {
+            initVariables(config);
 
             //
             window.addEventListener('scroll', function() {
-                var percent = 100 * window.pageYOffset / (pageHeight - scrollHeight);
 
-                stepPhone = ((phoneTrack.clientHeight - phoneSlideHeight) * percent) / 100;
+// console.log('PageY',window.pageYOffset);
 
-                phoneTrack.style.transform = 'translateY(-' + stepPhone + 'px)';
+                if(window.pageYOffset >= scrollHeightTrigger && (window.pageYOffset < (scrollHeightTrigger * 2))){
+                   //  v = true;
+                   // if(){
+                    scrollHeightTrigger += sectionHeight;
+                   //  v = false;
+                   // }
+                   //var percent = 100 * (scrollHeightTrigger - window.pageYOffset) / (sectionHeight / 2);
+                   percent = ((window.pageYOffset - scrollHeightTrigger) * 100) / (sectionHeight / 2);
+
+                   if(percent>=98) percent =100;
+
+                console.log('Porcetangem: ',percent);
+
+                    stepPhone = (phoneSlideHeight * percent) / 100;
+                    // console.log('stepPhone', phoneTrack.clientHeight  + ' - ' + phoneSlideHeight + ' = ' + stepPhone);
+
+                    phoneTrack.style.transform = 'translateY(-' + stepPhone + 'px)';
+                }else{
+                    percent = 0;
+                }
 
             });
 
 
             window.addEventListener('resize',function(){
-                initVariables(container, mirror);
+                initVariables(config);
             });
         }
     }
