@@ -31,6 +31,7 @@
   height: 640px;
 }
 .phone .phone-carousel{
+  position: relative;
   /*transition: all .3s;*/
 }
 .phone .phone-carousel img{
@@ -43,13 +44,13 @@
 .sections .section{
    position: relative;
 }
-.sections .section:nth-child(1){
+.sections .section:nth-child(3n + 1){
   background: #512DA8;
 }
-.sections .section:nth-child(3){
+.sections .section:nth-child(3n + 2){
   background-color: #673AB7;
 }
-.sections .section:nth-child(2){
+.sections .section:nth-child(3n + 3){
   background-color: #009688;
 }
 .sections .section h1{
@@ -59,4 +60,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+}
+
+.trigger{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #000;
+  z-index: 10;
+  transition: top .3s;
 }
