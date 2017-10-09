@@ -14,6 +14,8 @@ var rscroll = (function() {
     var scrollDirectionVal;
     var timer;
 
+    var idxSection;
+
     var $ = function(selector) {
         if (selector.substring(0, 1) == '#') {
             return document.getElementById(selector.substring(1, selector.length));
@@ -52,31 +54,63 @@ var rscroll = (function() {
     }
 
     var lockScroll =  function(){
-        if(window.pageYOffset >= scrollHeightTrigger){
+
+        percent = 0;
+
+        // console.log("window.pageYOffset ", window.pageYOffset );
+        // console.log("scrollHeightTrigger ", scrollHeightTrigger );
+        // console.log("sectionHeight ", sectionHeight );
+        // console.log("pageHeight ", pageHeight );
+        // console.log("scrollDirectionVal ", scrollDirectionVal );
+        // console.log("window.innerHeight ", window.innerHeight );
+
+        idxSection = parseInt(window.pageYOffset / sectionHeight);
+        // console.log("idxSection", idxSection);
+
+        $("#slideIndex").innerHTML = idxSection+1;
+        //console.log($("#slideIndex"));
+
+        areaStoppedFrom = idxSection * sectionHeight;
+        areaStoppedTo  = areaStoppedFrom + (sectionHeight/2);
+
+        // console.log("areaStoppedFrom", areaStoppedFrom);
+        // console.log("areaStoppedTo", areaStoppedTo);
+        // console.log("idxSection * sectionHeight = "+idxSection +" x "+sectionHeight, idxSection * sectionHeight);
+
+
+        if(window.pageYOffset >= areaStoppedFrom && window.pageYOffset <= areaStoppedTo){
+
+            stepPhone = idxSection * phoneSlideHeight;
+            //percent = 0;
+            // console.log("stepPhone", stepPhone);
+
+        } else if(window.pageYOffset >= scrollHeightTrigger){
 
             if(scrollDirection === 'down'){
                 if(window.pageYOffset >= (scrollHeightTrigger + halfSectionHeight)){
                    if(!isScrolling){
                     incrementScrollTrigger();
-                    if(parseFloat(phoneTrack.style.top.replace('px','')) != 0){
-                        stepPhone = parseFloat(phoneTrack.style.top.replace('px',''));
-                        console.log(stepPhone);
-                    }
+                    // if(parseFloat(phoneTrack.style.top.replace('px','')) != 0){
+                    //     stepPhone = parseFloat(phoneTrack.style.top.replace('px',''));
+                    //     console.log(stepPhone);
+                    // }
                    }
                    isScrolling = true;
                 }
             }
             //se estiver descendo
 
+
             var percent = ((window.pageYOffset - scrollHeightTrigger) * 100) / halfSectionHeight;
 
             if(percent >= 95) percent = 100;
             if(percent <= 5) percent = 0;
-            // console.log(stepPhone);
-            stepPhone = (phoneSlideHeight * percent) / 100;
+            // console.log("stepPhone", stepPhone);
+            // console.log("percent * " + phoneSlideHeight, percent);
 
-            console.log(phoneTrack.style.top);
-            phoneTrack.style.top = '-' + stepPhone + 'px';
+
+
+
         }else{
             if(scrollDirection === 'up'){
                 if(window.pageYOffset > halfSectionHeight){
@@ -87,6 +121,19 @@ var rscroll = (function() {
                 }
             }
         }
+        stepPhone = (phoneSlideHeight * percent) / 100 + (phoneSlideHeight * idxSection);
+
+        if (stepPhone > ((sectionsNumber-1) * phoneSlideHeight)) {
+            stepPhone = (sectionsNumber-1) * phoneSlideHeight;
+        }
+
+        phoneTrack.style.top = '-' + stepPhone + 'px';
+        // console.log("phoneSlideHeight", phoneSlideHeight);
+        // console.log("percent", percent);
+        // console.log("phoneTrack.style.top", phoneTrack.style.top);
+        // console.log("window.pageYOffset", window.pageYOffset);
+        // console.log("sectionsNumber", sectionsNumber);
+
     }
 
     var incrementScrollTrigger = function(){

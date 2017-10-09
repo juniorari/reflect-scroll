@@ -29,10 +29,30 @@
 .phone .phone-inner{
   overflow: hidden;
   height: 640px;
+  position: relative;
+}
+#slideIndex{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 130px;
+  z-index: 99;
+  color: #fff;
+  text-shadow: 0 0 4px #000;
 }
 .phone .phone-carousel{
   position: relative;
   /*transition: all .3s;*/
+  -webkit-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  -moz-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -o-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+       transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
+
+-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  -moz-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -o-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+       transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
 }
 .phone .phone-carousel img{
   max-width: 100%;
